@@ -371,3 +371,22 @@
     white-space: nowrap;
   }
 }
+
+/* DELETE BUTTON (global admin style) */
+.delete-btn {
+  background: linear-gradient(135deg, #f97373, #f43f5e);
+  border: none;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 10px 22px rgba(239, 68, 68, 0.35);
+}
+
+.delete-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(239, 68, 68, 0.55);
+}
