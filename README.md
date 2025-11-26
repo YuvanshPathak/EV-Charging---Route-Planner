@@ -3,6 +3,7 @@
 A full-stack web application designed to help EV users plan long-distance trips with intelligent routing, automatic charging stop detection, and real-time statistics — all wrapped in a clean, modern UI.
 
 🚀 Features
+
 🔐 Authentication
 
 Google OAuth for users
@@ -65,6 +66,7 @@ Deployment
 Vercel (CI/CD enabled)
 
 📁 Project Structure
+
 src/
  ├── assets/            → icons, logos
  ├── components/        → shared components (sidebar, topbar, etc.)
@@ -76,3 +78,4 @@ src/
  ├── user.css           → user dashboard styles
  ├── admin.css          → admin dashboard styles
  └── main.jsx
+
