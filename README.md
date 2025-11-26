@@ -1,6 +1,6 @@
 ⚡ ZapGo — EV Charging & Route Planner
 
-A full-stack web application designed to help EV users plan long-distance trips with intelligent routing, automatic charging stop detection, and real-time statistics — all wrapped in a clean, modern UI.
+A full-stack web application that helps EV users plan long-distance trips with smart routing, automatic charging stop detection, and real-time booking insights — all in a clean, responsive UI.
 
 🚀 Features
 
@@ -14,25 +14,25 @@ Protected routes using React Router
 
 🗺️ Smart EV Route Planning
 
-Distance, duration & energy usage estimation
+Distance, duration & energy consumption estimation
 
-Automatic charging stop suggestions
+Automatic charging stop recommendations
 
 Interactive map interface
 
 🔋 Charging Station Management (Admin)
 
-Add / edit / delete charging stations
+Add / edit / delete stations
 
-Send notifications to stations (simulated)
+Simulated notifications to stations
 
 📊 Booking Insights
 
-View all bookings in real time
+Live bookings dashboard
 
-Total distance, total travel time
+Total distance & travel time calculations
 
-Daily booking analytics using Chart.js
+Daily analytics powered by Chart.js
 
 ☁️ Cloud Integration
 
@@ -40,9 +40,7 @@ Firebase Firestore (real-time)
 
 Firebase Authentication
 
-User booking sync
-
-Admin analytics auto-updated
+Automated sync for user bookings & admin stats
 
 🛠️ Tech Stack
 Frontend
@@ -53,7 +51,7 @@ React Router
 
 Chart.js
 
-Custom CSS (no UI framework)
+Custom CSS
 
 Backend / Cloud
 
@@ -66,16 +64,16 @@ Deployment
 Vercel (CI/CD enabled)
 
 📁 Project Structure
-
+```text
 src/
- ├── assets/            → icons, logos
- ├── components/        → shared components (sidebar, topbar, etc.)
- ├── context/           → AuthContext for login state
- ├── firebase/          → firebase.js config
- ├── hooks/             → custom hooks
- ├── pages/             → all user/admin pages
- ├── styles.css         → global styles
- ├── user.css           → user dashboard styles
- ├── admin.css          → admin dashboard styles
- └── main.jsx
-
+├── assets/ → icons, logos
+├── components/ → shared UI (sidebar, topbar, etc.)
+├── context/ → global AuthContext
+├── firebase/ → firebase.js config
+├── hooks/ → custom hooks
+├── pages/ → user + admin pages
+├── styles.css → global styles
+├── user.css → user dashboard styles
+├── admin.css → admin dashboard styles
+└── main.jsx
+```
