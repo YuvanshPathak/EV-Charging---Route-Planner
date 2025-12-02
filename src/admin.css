@@ -390,3 +390,16 @@
   transform: translateY(-1px);
   box-shadow: 0 14px 28px rgba(239, 68, 68, 0.55);
 }
+
+.verify-btn {
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  background: linear-gradient(135deg,#10b981,#059669);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.verify-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(6,95,70,0.25); }
+

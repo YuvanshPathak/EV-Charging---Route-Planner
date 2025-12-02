@@ -6,6 +6,7 @@ import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useAuth } from "../context/AuthContext";
+import { createBlock, getLastBlock } from "../utils/ledger.js";
 
 
 const defaultMarkerIcon = L.icon({
@@ -272,42 +273,62 @@ stopMarkersRef.current.push(startMarker, endMarker);
 
   // -------- Booking --------
 
-  async function handleBooking() {
-    if (!totalDist || !totalTimeHrs || !start || !end) {
-      showToast("Plan a route before booking.", "error");
-      return;
-    }
-
-    const booking = {
-      from: start.trim(),
-      to: end.trim(),
-      dist: totalDist.toFixed(1),
-      time: Number(totalTimeHrs).toFixed(1),
-      createdAt: new Date().toLocaleString(),
-    };
-
-    // local state + localStorage
-    const merged = [...bookings, booking];
-    setBookings(merged);
-    localStorage.setItem("zapgoBookings", JSON.stringify(merged));
-
-    // Firestore
-    try {
-      await addDoc(collection(db, "bookings"), {
-        uid: user?.uid || null,
-        email: user?.email || null,
-        start: booking.from,
-        destination: booking.to,
-        distance: booking.dist,
-        durationHours: booking.time,
-        createdAt: new Date().toISOString(),
-      });
-    } catch (err) {
-      console.error("Firestore booking save failed:", err);
-    }
-
-    showToast("Booking confirmed!", "success");
+async function handleBooking() {
+  if (!totalDist || !totalTimeHrs || !start || !end) {
+    showToast("Plan a route before booking.", "error");
+    return;
   }
+
+  const booking = {
+    from: start.trim(),
+    to: end.trim(),
+    dist: totalDist.toFixed(1),
+    time: Number(totalTimeHrs).toFixed(1),
+    createdAt: new Date().toLocaleString(),
+  };
+
+  // Save locally
+  const merged = [...bookings, booking];
+  setBookings(merged);
+  localStorage.setItem("zapgoBookings", JSON.stringify(merged));
+
+  // ---- BLOCKCHAIN ----
+  const prevBlock = await getLastBlock(db);
+
+  const block = createBlock(prevBlock, {
+    uid: user?.uid || "",
+    from: booking.from,
+    to: booking.to,
+    distance: booking.dist,
+    durationHours: booking.time,
+  });
+
+  // Clean undefined (paranoid safety)
+  Object.keys(block).forEach(k => {
+    if (block[k] === undefined) block[k] = "";
+  });
+
+  await addDoc(collection(db, "ledger"), block);
+  // ---- END BLOCKCHAIN ----
+
+  // Firestore booking
+  try {
+    await addDoc(collection(db, "bookings"), {
+      uid: user?.uid || null,
+      email: user?.email || null,
+      start: booking.from,
+      destination: booking.to,
+      distance: booking.dist,
+      durationHours: booking.time,
+      createdAt: new Date().toISOString(),
+    });
+  } catch (err) {
+    console.error("Firestore booking save failed:", err);
+  }
+
+  showToast("Booking confirmed!", "success");
+}
+
 
   // -------- Render --------
 

@@ -1,4 +1,13 @@
 // src/pages/AdminDashboard.jsx
+// near other imports
+// in src/pages/AdminDashboard.jsx
+import {
+  computeHashForBlock,
+  createBlock,
+  verifyChain,
+  getLastBlock,        // <-- if you need the whole block
+  getLastBlockHash,    // <-- if you only need the last hash
+} from "../utils/ledger.js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -171,6 +180,60 @@ export default function AdminDashboard() {
   }, [navigate]);
 
   // --- Handlers ---
+
+  // basic verification handler — put below other handlers
+const handleVerifyBooking = async (booking) => {
+  try {
+    // 1) load ledger
+    const snap = await getDocs(collection(db, "ledger"));
+    const chain = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    if (chain.length === 0) {
+      alert("No ledger blocks found.");
+      return;
+    }
+
+    // 2) sort by index asc (safety in case server ordering differs)
+    chain.sort((a,b) => (Number(a.index)||0) - (Number(b.index)||0));
+
+    // 3) verify entire chain
+    if (!verifyChain(chain)) {
+      alert("Chain ❌: invalid block found (ledger integrity failed).");
+      return;
+    }
+
+    // 4) find matching block for this booking (tweak predicate if your field names differ)
+    const match = chain.find(b => {
+      const sameUid = String(b.uid || "") === String(booking.uid || booking.userUid || "");
+      const sameFrom = String((b.from || b.start || "")).trim() === String((booking.from || booking.start || "")).trim();
+      const sameTo = String((b.to || b.destination || "")).trim() === String((booking.to || booking.destination || "")).trim();
+      const sameDist = (b.distance || b.dist || "") == (booking.distance || booking.dist || booking.dist || "");
+      const sameTime = (b.duration || b.durationHours || b.time || "") == (booking.durationHours || booking.time || "");
+      const sameCreated = String(b.createdAt || "") === String(booking.createdAt || "");
+      return sameUid && sameFrom && sameTo && (sameDist || sameTime || sameCreated);
+    });
+
+    if (!match) {
+      alert("No matching block found for this booking in ledger.");
+      return;
+    }
+
+    // 5) recompute hash and compare
+    const computed = computeHashForBlock(match);
+    if (computed === (match.hash || match._hash || "")) {
+      alert("Booking ✅: hash matches and chain valid.");
+    } else {
+      alert("Booking ❌: hash mismatch for matched block.");
+      console.error("Stored block:", match);
+      console.error("Computed hash:", computed);
+    }
+  } catch (err) {
+    console.error("Verify failed:", err);
+    alert("Verification failed — check console.");
+  }
+};
+
+
 
   const handleLogout = () => {
     sessionStorage.removeItem("isAdminLoggedIn");
@@ -601,6 +664,7 @@ export default function AdminDashboard() {
                       <th>Distance (km)</th>
                       <th>Duration (hrs)</th>
                       <th>Created At</th>
+                      <th>Verify</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -637,6 +701,9 @@ export default function AdminDashboard() {
                           <td>{distance}</td>
                           <td>{durationDisplay}</td>
                           <td>{formatCreatedAt(b.createdAt)}</td>
+                          <td>
+                          <button className="verify-btn" onClick={() => handleVerifyBooking(b)}>Verify</button>
+                          </td>
                         </tr>
                       );
                     })}
