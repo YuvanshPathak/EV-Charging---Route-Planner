@@ -32,7 +32,7 @@ export default function MapPage() {
 
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
-  const [rangeKm, setRangeKm] = useState(300);
+  const [rangeKm, setRangeKm] = useState(300); // can be number or "" while editing
   const [initialCharge, setInitialCharge] = useState("");
   const [finalCharge, setFinalCharge] = useState("");
   const [hours, setHours] = useState("");
@@ -71,10 +71,10 @@ export default function MapPage() {
       const res = await fetch(url);
       const data = await res.json();
       return (
-        data.address.city ||
-        data.address.town ||
-        data.address.village ||
-        data.address.state ||
+        data.address?.city ||
+        data.address?.town ||
+        data.address?.village ||
+        data.address?.state ||
         "Unknown Location"
       );
     } catch {
@@ -121,17 +121,18 @@ export default function MapPage() {
     const hoursNum = parseInt(hours, 10);
     const minutesNum = parseInt(minutes, 10);
 
-    // --- NEW: parse & validate initial/final charge values ---
+    // parse initial/final charges
     const initChargeNum = Number.parseInt(initialCharge, 10);
     const finalChargeNum = Number.parseInt(finalCharge, 10);
 
-    // Presence checks
+    // validate presence of start/end
     if (!startTrim || !endTrim) {
       setLoadingRoute(false);
       showToast("Enter both Start & Destination!", "error");
       return;
     }
 
+    // validate time
     if (
       isNaN(hoursNum) ||
       isNaN(minutesNum) ||
@@ -145,7 +146,7 @@ export default function MapPage() {
       return;
     }
 
-    // Validate initial/final charges: require both and be integers between 1 and 100
+    // validate initial/final charges (must be integers between 1 and 100)
     if (
       Number.isNaN(initChargeNum) ||
       Number.isNaN(finalChargeNum) ||
@@ -158,7 +159,16 @@ export default function MapPage() {
       showToast("Initial and Final charge must be numbers between 1 and 100.", "error");
       return;
     }
-    // NOTE: intentionally allow finalCharge > initialCharge (user may plan to charge en route)
+
+    // validate range: required and must be 1..2000
+    const rangeNum = Number(rangeKm);
+    if (rangeKm === "" || Number.isNaN(rangeNum) || rangeNum < 1 || rangeNum > 2000) {
+      setLoadingRoute(false);
+      showToast("Range must be a number between 1 and 2000 km.", "error");
+      return;
+    }
+
+    // NOTE: allow finalCharge > initialCharge (user may plan to charge en route)
 
     let hours24 = hoursNum % 12;
     if (ampm === "PM") hours24 += 12;
@@ -310,15 +320,23 @@ export default function MapPage() {
       return;
     }
 
+    // Range must still be valid at booking time
+    const rangeNum = Number(rangeKm);
+    if (rangeKm === "" || Number.isNaN(rangeNum) || rangeNum < 1 || rangeNum > 2000) {
+      showToast("Range must be a number between 1 and 2000 km.", "error");
+      return;
+    }
+
     const booking = {
       from: start.trim(),
       to: end.trim(),
       dist: totalDist.toFixed(1),
       time: Number(totalTimeHrs).toFixed(1),
       createdAt: new Date().toLocaleString(),
-      // --- include numeric charge data for consistency ---
+      // include numeric charge data for consistency
       initialCharge: initChargeNum,
       finalCharge: finalChargeNum,
+      rangeKm: rangeNum,
     };
 
     // Save locally
@@ -337,6 +355,7 @@ export default function MapPage() {
       durationHours: booking.time,
       initialCharge: booking.initialCharge,
       finalCharge: booking.finalCharge,
+      rangeKm: booking.rangeKm,
     });
 
     // Clean undefined (paranoid safety)
@@ -358,6 +377,7 @@ export default function MapPage() {
         durationHours: booking.time,
         initialCharge: booking.initialCharge,
         finalCharge: booking.finalCharge,
+        rangeKm: booking.rangeKm,
         createdAt: new Date().toISOString(),
       });
     } catch (err) {
@@ -429,37 +449,33 @@ export default function MapPage() {
         </div>
 
         <label className="field-label">Range (in km)</label>
-<input
-  type="number"
-  className="field-input"
-  placeholder="between 1 and 2000"
-  min="1"
-  max="2000"
-  value={rangeKm}
-  onKeyDown={(e) => {
-    // block invalid chars
-    if (["e", "E", "+", "-"].includes(e.key)) {
-      e.preventDefault();
-    }
-
-    // block 0 as first digit
-    if (e.key === "0" && rangeKm === "") {
-      e.preventDefault();
-    }
-  }}
-  onChange={(e) => {
-    const v = e.target.value;
-
-    if (v === "") return setRangeKm("");
-
-    if (Number(v) < 1 || Number(v) > 2000) return;
-
-    setRangeKm(v);
-  }}
-/>
-
-
-
+        <input
+          type="number"
+          className="field-input"
+          placeholder="between 1 and 2000"
+          min="1"
+          max="2000"
+          value={rangeKm}
+          onKeyDown={(e) => {
+            // prevent e/E and +/-
+            if (["e", "E", "+", "-"].includes(e.key)) e.preventDefault();
+          }}
+          onChange={(e) => {
+            const v = e.target.value;
+            // allow empty input so user can clear
+            if (v === "") return setRangeKm("");
+            // allow only integer digits
+            if (!/^\d+$/.test(v)) return;
+            // clamp to bounds on entry (but we still validate on Plan/Book)
+            const num = Number(v);
+            if (num < 1 || num > 2000) {
+              // Do not set out-of-range; show toast to guide user
+              showToast("Range must be between 1 and 2000 km.", "error");
+              return;
+            }
+            setRangeKm(num);
+          }}
+        />
 
         <label className="field-label">Journey Start Time</label>
         <div className="field-row">
