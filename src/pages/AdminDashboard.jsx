@@ -221,9 +221,9 @@ const handleVerifyBooking = async (booking) => {
     // 5) recompute hash and compare
     const computed = computeHashForBlock(match);
     if (computed === (match.hash || match._hash || "")) {
-      alert("Booking ✅: hash matches and chain valid.");
+      alert("Booking verified: hash matches and chain valid.");
     } else {
-      alert("Booking ❌: hash mismatch for matched block.");
+      alert("Booking verification failed: hash mismatch for matched block.");
       console.error("Stored block:", match);
       console.error("Computed hash:", computed);
     }

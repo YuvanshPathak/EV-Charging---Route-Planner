@@ -1,3 +1,4 @@
+/* GLOBAL BODY */
 body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -6,6 +7,7 @@ body {
     overflow-x: hidden;
 }
 
+/* PARTICLES */
 .particles {
     position: fixed;
     top: 0;
@@ -30,6 +32,7 @@ body {
     75% { transform: translateY(-100px) translateX(100px); }
 }
 
+/* HEADER */
 .header {
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
@@ -54,42 +57,50 @@ body {
     background-clip: text;
 }
 
-/* Card */
-.login-container {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 24px;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+/* WRAPPER */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    position: relative;
+}
+
+/* FIX: ISOLATE USER LOGIN CARD FROM ADMIN CSS */
+.login-page .login-container {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3) !important;
     animation: slideUp 0.6s ease-out;
     position: relative;
     overflow: hidden;
     top: 2rem;
     width: 100%;
-    max-width: 28rem;      /* ≈ Tailwind max-w-md */
-    padding: 2.5rem;       /* ≈ Tailwind p-10 */
-    text-align: center;    /* center inner content */
+    max-width: 28rem;
+    padding: 2.5rem;
+    text-align: center;
+    z-index: 10;
 }
 
-.login-container::before {
+/* RESTORED OLD GLOW — EXACTLY LIKE BEFORE */
+.login-page .login-container::before {
     content: '';
     position: absolute;
     top: -50%;
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(31, 184, 0, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(79, 197, 55, 0.25) 0%, transparent 70%);
     animation: rotate 20s linear infinite;
+    z-index: -1;
 }
 
+/* ANIMATIONS */
 @keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes rotate {
@@ -97,6 +108,7 @@ body {
     to { transform: rotate(360deg); }
 }
 
+/* TITLE */
 .title {
     font-size: 40px;
     font-weight: 800;
@@ -107,7 +119,7 @@ body {
     margin-bottom: 8px;
 }
 
-/* GOOGLE BUTTON – bigger + centered */
+/* GOOGLE BUTTON */
 .google-btn {
     background: white;
     border: 2px solid #e5e7eb;
@@ -124,8 +136,8 @@ body {
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    width: 80%;      /* wider */
-    margin: 0 auto;  /* centered in card */
+    width: 80%;
+    margin: 0 auto;
 }
 
 .google-btn::before {
@@ -152,73 +164,10 @@ body {
     box-shadow: 0 10px 25px rgba(103, 126, 234, 0.3);
 }
 
-.google-btn:active {
-    transform: translateY(0);
-}
+.loading .spinner { display: inline-block; }
+.loading span { display: none; }
 
-.google-btn i {
-    font-size: 24px;
-    z-index: 1;
-}
-
-.google-btn span {
-    z-index: 1;
-}
-
-.feature-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-    border-radius: 16px;
-    padding: 24px;
-    margin-top: 32px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    animation: fadeIn 0.8s ease-out 0.3s both;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.feature-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-    color: #1f2937;
-}
-
-.feature-item:last-child {
-    margin-bottom: 0;
-}
-
-.feature-icon {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #1fb800, #00ff88);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 20px;
-    flex-shrink: 0;
-}
-
-.pulse {
-    animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
+/* SPINNER */
 .spinner {
     display: none;
     width: 20px;
@@ -234,25 +183,43 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-.loading .spinner {
-    display: inline-block;
+/* FEATURE CARD */
+.feature-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 32px;
+    border: 1px solid rgba(255,255,255,0.22);
+    animation: fadeIn 0.8s ease-out 0.3s both;
 }
 
-.loading span {
-    display: none;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Outer wrapper for the login page */
-.login-page {
-    min-height: 100vh;
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    color: #1f2937;
+}
+
+.feature-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #58c143, #00ff88);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
-    position: relative;
+    color: white;
+    font-size: 20px;
+    flex-shrink: 0;
 }
 
-/* Admin button in header (top-right) */
+/* ADMIN BUTTON */
 .admin-btn {
     margin-left: auto;
     padding: 0.5rem 1rem;
@@ -270,23 +237,26 @@ body {
     color: #000000;
 }
 
-/* Minimal Tailwind-like utilities we used in JSX */
-.text-center {
-    text-align: center;
+/* Utility Classes */
+.text-center { text-align: center; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.text-gray-600 { color: #4b5563; }
+.text-lg { font-size: 1.125rem; }
+
+/* /* smooth breathing animation */
+.logo {
+  display: inline-block;
+  animation: pulse 2s ease-in-out infinite;
 }
 
-.mb-8 {
-    margin-bottom: 2rem;
+@keyframes pulse {
+  0%,100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
-.mb-6 {
-    margin-bottom: 1.5rem;
-}
 
-.text-gray-600 {
-    color: #4b5563;
-}
-
-.text-lg {
-    font-size: 1.125rem;
-}

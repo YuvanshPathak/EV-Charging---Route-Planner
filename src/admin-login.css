@@ -43,14 +43,14 @@
 }
 
 /* Container centers the card (no background) */
-.login-container {
-  width: 100%;
-  max-width: 420px;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none; /* allow card children to handle pointer events */
+ .admin-login-root .login-container {
+   width: 100%;
+   max-width: 420px;
+   padding: 1rem;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+  /* remove pointer-events:none for admin — child elements should handle pointer events */
 }
 
 /* The visible login card */
