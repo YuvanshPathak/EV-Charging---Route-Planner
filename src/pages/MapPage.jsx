@@ -1,3 +1,4 @@
+// src/pages/MapPage.jsx
 import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -7,7 +8,6 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useAuth } from "../context/AuthContext";
 import { createBlock, getLastBlock } from "../utils/ledger.js";
-
 
 const defaultMarkerIcon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
@@ -89,20 +89,18 @@ export default function MapPage() {
   }
 
   // -------- Map init --------
+  useEffect(() => {
+    if (!mapRef.current || mapInstanceRef.current) return;
 
-useEffect(() => {
-  if (!mapRef.current || mapInstanceRef.current) return;
+    const map = L.map(mapRef.current).setView([20.5937, 78.9629], 5);
+    mapInstanceRef.current = map;
 
-  const map = L.map(mapRef.current).setView([20.5937, 78.9629], 5);
-  mapInstanceRef.current = map;
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+    }).addTo(map);
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-  }).addTo(map);
-
-  setTimeout(() => map.invalidateSize(), 200);
-}, []);
-
+    setTimeout(() => map.invalidateSize(), 200);
+  }, []);
 
   // Load bookings from localStorage once
   useEffect(() => {
@@ -123,6 +121,11 @@ useEffect(() => {
     const hoursNum = parseInt(hours, 10);
     const minutesNum = parseInt(minutes, 10);
 
+    // --- NEW: parse & validate initial/final charge values ---
+    const initChargeNum = Number.parseInt(initialCharge, 10);
+    const finalChargeNum = Number.parseInt(finalCharge, 10);
+
+    // Presence checks
     if (!startTrim || !endTrim) {
       setLoadingRoute(false);
       showToast("Enter both Start & Destination!", "error");
@@ -141,6 +144,21 @@ useEffect(() => {
       showToast("Enter a valid journey start time!", "error");
       return;
     }
+
+    // Validate initial/final charges: require both and be integers between 1 and 100
+    if (
+      Number.isNaN(initChargeNum) ||
+      Number.isNaN(finalChargeNum) ||
+      initChargeNum < 1 ||
+      initChargeNum > 100 ||
+      finalChargeNum < 1 ||
+      finalChargeNum > 100
+    ) {
+      setLoadingRoute(false);
+      showToast("Initial and Final charge must be numbers between 1 and 100.", "error");
+      return;
+    }
+    // NOTE: intentionally allow finalCharge > initialCharge (user may plan to charge en route)
 
     let hours24 = hoursNum % 12;
     if (ampm === "PM") hours24 += 12;
@@ -173,26 +191,23 @@ useEffect(() => {
     stopMarkersRef.current = [];
 
     const routingControl = L.Routing.control({
-  waypoints: [L.latLng(startC.lat, startC.lng), L.latLng(endC.lat, endC.lng)],
-  routeWhileDragging: false,
-  addWaypoints: false,
-  show: false,
-  createMarker: () => null,
-}).addTo(map);
-
+      waypoints: [L.latLng(startC.lat, startC.lng), L.latLng(endC.lat, endC.lng)],
+      routeWhileDragging: false,
+      addWaypoints: false,
+      show: false,
+      createMarker: () => null,
+    }).addTo(map);
 
     routingRef.current = routingControl;
     const startMarker = L.marker([startC.lat, startC.lng], {
-  icon: defaultMarkerIcon,
-}).addTo(map);
+      icon: defaultMarkerIcon,
+    }).addTo(map);
 
-const endMarker = L.marker([endC.lat, endC.lng], {
-  icon: defaultMarkerIcon,
-}).addTo(map);
+    const endMarker = L.marker([endC.lat, endC.lng], {
+      icon: defaultMarkerIcon,
+    }).addTo(map);
 
-stopMarkersRef.current.push(startMarker, endMarker);
-
-
+    stopMarkersRef.current.push(startMarker, endMarker);
 
     routingControl.on("routesfound", async (e) => {
       const route = e.routes[0];
@@ -255,15 +270,15 @@ stopMarkersRef.current.push(startMarker, endMarker);
       });
 
       const marker = L.marker([point.lat, point.lng], {
-  icon: defaultMarkerIcon,
-})
-  .addTo(map)
-  .bindPopup(
-    `<b>${locName}</b><br>
-     Arrival: ${arrivalTime}<br>
-     Departure: ${departureTime}<br>
-     Charge: ${chargeDur} mins`
-  );
+        icon: defaultMarkerIcon,
+      })
+        .addTo(map)
+        .bindPopup(
+          `<b>${locName}</b><br>
+           Arrival: ${arrivalTime}<br>
+           Departure: ${departureTime}<br>
+           Charge: ${chargeDur} mins`
+        );
 
       stopMarkersRef.current.push(marker);
     }
@@ -273,62 +288,84 @@ stopMarkersRef.current.push(startMarker, endMarker);
 
   // -------- Booking --------
 
-async function handleBooking() {
-  if (!totalDist || !totalTimeHrs || !start || !end) {
-    showToast("Plan a route before booking.", "error");
-    return;
-  }
+  async function handleBooking() {
+    if (!totalDist || !totalTimeHrs || !start || !end) {
+      showToast("Plan a route before booking.", "error");
+      return;
+    }
 
-  const booking = {
-    from: start.trim(),
-    to: end.trim(),
-    dist: totalDist.toFixed(1),
-    time: Number(totalTimeHrs).toFixed(1),
-    createdAt: new Date().toLocaleString(),
-  };
+    // Ensure initial/final charge numeric & valid before booking as well
+    const initChargeNum = Number.parseInt(initialCharge, 10);
+    const finalChargeNum = Number.parseInt(finalCharge, 10);
 
-  // Save locally
-  const merged = [...bookings, booking];
-  setBookings(merged);
-  localStorage.setItem("zapgoBookings", JSON.stringify(merged));
+    if (
+      Number.isNaN(initChargeNum) ||
+      Number.isNaN(finalChargeNum) ||
+      initChargeNum < 1 ||
+      initChargeNum > 100 ||
+      finalChargeNum < 1 ||
+      finalChargeNum > 100
+    ) {
+      showToast("Initial and Final charge must be numbers between 1 and 100.", "error");
+      return;
+    }
 
-  // ---- BLOCKCHAIN ----
-  const prevBlock = await getLastBlock(db);
+    const booking = {
+      from: start.trim(),
+      to: end.trim(),
+      dist: totalDist.toFixed(1),
+      time: Number(totalTimeHrs).toFixed(1),
+      createdAt: new Date().toLocaleString(),
+      // --- include numeric charge data for consistency ---
+      initialCharge: initChargeNum,
+      finalCharge: finalChargeNum,
+    };
 
-  const block = createBlock(prevBlock, {
-    uid: user?.uid || "",
-    from: booking.from,
-    to: booking.to,
-    distance: booking.dist,
-    durationHours: booking.time,
-  });
+    // Save locally
+    const merged = [...bookings, booking];
+    setBookings(merged);
+    localStorage.setItem("zapgoBookings", JSON.stringify(merged));
 
-  // Clean undefined (paranoid safety)
-  Object.keys(block).forEach(k => {
-    if (block[k] === undefined) block[k] = "";
-  });
+    // ---- BLOCKCHAIN ----
+    const prevBlock = await getLastBlock(db);
 
-  await addDoc(collection(db, "ledger"), block);
-  // ---- END BLOCKCHAIN ----
-
-  // Firestore booking
-  try {
-    await addDoc(collection(db, "bookings"), {
-      uid: user?.uid || null,
-      email: user?.email || null,
-      start: booking.from,
-      destination: booking.to,
+    const block = createBlock(prevBlock, {
+      uid: user?.uid || "",
+      from: booking.from,
+      to: booking.to,
       distance: booking.dist,
       durationHours: booking.time,
-      createdAt: new Date().toISOString(),
+      initialCharge: booking.initialCharge,
+      finalCharge: booking.finalCharge,
     });
-  } catch (err) {
-    console.error("Firestore booking save failed:", err);
+
+    // Clean undefined (paranoid safety)
+    Object.keys(block).forEach((k) => {
+      if (block[k] === undefined) block[k] = "";
+    });
+
+    await addDoc(collection(db, "ledger"), block);
+    // ---- END BLOCKCHAIN ----
+
+    // Firestore booking
+    try {
+      await addDoc(collection(db, "bookings"), {
+        uid: user?.uid || null,
+        email: user?.email || null,
+        start: booking.from,
+        destination: booking.to,
+        distance: booking.dist,
+        durationHours: booking.time,
+        initialCharge: booking.initialCharge,
+        finalCharge: booking.finalCharge,
+        createdAt: new Date().toISOString(),
+      });
+    } catch (err) {
+      console.error("Firestore booking save failed:", err);
+    }
+
+    showToast("Booking confirmed!", "success");
   }
-
-  showToast("Booking confirmed!", "success");
-}
-
 
   // -------- Render --------
 
@@ -339,12 +376,12 @@ async function handleBooking() {
         {/* user profile */}
         <div className="user-card">
           <div className="avatar">
-              {user?.photoURL ? (
-                <img src={user.photoURL} alt="avatar" />
-                  ) : (
-        <span>{user?.displayName?.[0]?.toUpperCase() || "U"}</span>
-          )}
-        </div>
+            {user?.photoURL ? (
+              <img src={user.photoURL} alt="avatar" />
+            ) : (
+              <span>{user?.displayName?.[0]?.toUpperCase() || "U"}</span>
+            )}
+          </div>
 
           <div>
             <p className="user-name">{user?.displayName || "User"}</p>
@@ -392,12 +429,37 @@ async function handleBooking() {
         </div>
 
         <label className="field-label">Range (in km)</label>
-        <input
-          type="number"
-          className="field-input"
-          value={rangeKm}
-          onChange={(e) => setRangeKm(e.target.value)}
-        />
+<input
+  type="number"
+  className="field-input"
+  placeholder="between 1 and 2000"
+  min="1"
+  max="2000"
+  value={rangeKm}
+  onKeyDown={(e) => {
+    // block invalid chars
+    if (["e", "E", "+", "-"].includes(e.key)) {
+      e.preventDefault();
+    }
+
+    // block 0 as first digit
+    if (e.key === "0" && rangeKm === "") {
+      e.preventDefault();
+    }
+  }}
+  onChange={(e) => {
+    const v = e.target.value;
+
+    if (v === "") return setRangeKm("");
+
+    if (Number(v) < 1 || Number(v) > 2000) return;
+
+    setRangeKm(v);
+  }}
+/>
+
+
+
 
         <label className="field-label">Journey Start Time</label>
         <div className="field-row">
@@ -479,13 +541,13 @@ async function handleBooking() {
               ))}
             </div>
             <button
-                    className="book-btn"
-                    onClick={handleBooking}
-                    disabled={!totalDist}
-                  >
-                  Confirm Booking
-                </button>
-              </div>
+              className="book-btn"
+              onClick={handleBooking}
+              disabled={!totalDist}
+            >
+              Confirm Booking
+            </button>
+          </div>
         )}
 
         {/* Bookings */}
