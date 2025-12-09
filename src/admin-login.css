@@ -130,6 +130,7 @@ form { width: 100%; display: block; }
   font-size: 0.95rem;
   outline: none;
   transition: box-shadow 0.16s ease, border-color 0.12s ease, transform 0.12s ease;
+  appearance: none;
   -webkit-appearance: none;
 }
 
