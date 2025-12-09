@@ -1,11 +1,12 @@
+// src/pages/AdminLogin.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../admin-login.css";
+import AdminParticles from "../components/AdminParticles";
 
 const ADMIN_CREDENTIALS = [
   { username: "admin", password: "password123" },
   { username: "YuvanshPathak", password: "12345678" },
-  //{ username: "VipinMittal", password: "12345678" },
 ];
 
 export default function AdminLogin() {
@@ -32,10 +33,11 @@ export default function AdminLogin() {
 
   return (
     <div className="admin-login-root">
-      <div className="stars-bg" />
+      {/* particles background — placed before the card so it sits behind */}
+      <AdminParticles />
 
       <div className="login-container">
-        <div className="login-card">
+        <div className="login-card" role="dialog" aria-label="Admin login">
           <h2>Admin Login</h2>
 
           <form id="adminLoginForm" onSubmit={handleSubmit}>
@@ -69,11 +71,11 @@ export default function AdminLogin() {
               Login
             </button>
 
-            {/* ⭐ NEW BUTTON — Redirect to User Login */}
             <button
               type="button"
               className="user-login-btn"
               onClick={() => navigate("/login")}
+              style={{ marginTop: "0.6rem" }}
             >
               User Login
             </button>
