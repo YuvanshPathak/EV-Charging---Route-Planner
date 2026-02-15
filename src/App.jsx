@@ -2,6 +2,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext.jsx";
 import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
 import UserLayout from "./pages/UserLayout.jsx";
 import AdminLogin from "./pages/AdminLogin.jsx";
 import AdminDashboard from "./pages/AdminDashboard.jsx";
@@ -27,6 +28,7 @@ export default function App() {
 
       {/* user auth flow */}
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route
         path="/app/*"
         element={
