@@ -49,5 +49,3 @@ lint_output.txt
 *.njsproj
 *.sln
 *.sw?
-# local only testing folder
-zapgo-selenium-tests/
