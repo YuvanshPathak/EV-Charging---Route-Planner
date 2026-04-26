@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="TestSuite" time="23.697" tests="21" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="TestSuite" time="24.975" tests="21" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\OpenLogic\jdk-11.0.21.9-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\patha\AppData\Local\Temp\surefire7551440364486851525\surefirebooter-20260426205115870_3.jar C:\Users\patha\AppData\Local\Temp\surefire7551440364486851525 2026-04-26T20-51-15_669-jvmRun1 surefire-20260426205115870_1tmp surefire_0-20260426205115870_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\patha\AppData\Local\Temp\surefire12118785416976246008\surefirebooter-20260426225230281_3.jar C:\Users\patha\AppData\Local\Temp\surefire12118785416976246008 2026-04-26T22-52-30_060-jvmRun1 surefire-20260426225230281_1tmp surefire_0-20260426225230281_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\patha\Desktop\Fullstack Proj\EV-charging-and-route-planner\zapgo-selenium-tests\target\test-classes;C:\Users\patha\Desktop\Fullstack Proj\EV-charging-and-route-planner\zapgo-selenium-tests\target\classes;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-java\4.21.0\selenium-java-4.21.0.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-api\4.21.0\selenium-api-4.21.0.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-chrome-driver\4.21.0\selenium-chrome-driver-4.21.0.jar;C:\Users\patha\.m2\repository\com\google\auto\service\auto-service-annotations\1.1.1\auto-service-annotations-1.1.1.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-chromium-driver\4.21.0\selenium-chromium-driver-4.21.0.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-json\4.21.0\selenium-json-4.21.0.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-manager\4.21.0\selenium-manager-4.21.0.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v123\4.21.0\selenium-devtools-v123-4.21.0.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v124\4.21.0\selenium-devtools-v124-4.21.0.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v125\4.21.0\selenium-devtools-v125-4.21.0.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v85\4.21.0\selenium-devtools-v85-4.21.0.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-edge-driver\4.21.0\selenium-edge-driver-4.21.0.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-firefox-driver\4.21.0\selenium-firefox-driver-4.21.0.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-http\4.21.0\selenium-http-4.21.0.jar;C:\Users\patha\.m2\repository\dev\failsafe\failsafe\3.3.2\failsafe-3.3.2.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-ie-driver\4.21.0\selenium-ie-driver-4.21.0.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-remote-driver\4.21.0\selenium-remote-driver-4.21.0.jar;C:\Users\patha\.m2\repository\com\google\guava\guava\33.2.0-jre\guava-33.2.0-jre.jar;C:\Users\patha\.m2\repository\com\google\guava\failureaccess\1.0.2\failureaccess-1.0.2.jar;C:\Users\patha\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\patha\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\patha\.m2\repository\org\checkerframework\checker-qual\3.42.0\checker-qual-3.42.0.jar;C:\Users\patha\.m2\repository\com\google\errorprone\error_prone_annotations\2.26.1\error_prone_annotations-2.26.1.jar;C:\Users\patha\.m2\repository\com\google\j2objc\j2objc-annotations\3.0.0\j2objc-annotations-3.0.0.jar;C:\Users\patha\.m2\repository\io\opentelemetry\semconv\opentelemetry-semconv\1.25.0-alpha\opentelemetry-semconv-1.25.0-alpha.jar;C:\Users\patha\.m2\repository\io\opentelemetry\opentelemetry-api\1.38.0\opentelemetry-api-1.38.0.jar;C:\Users\patha\.m2\repository\io\opentelemetry\opentelemetry-context\1.38.0\opentelemetry-context-1.38.0.jar;C:\Users\patha\.m2\repository\io\opentelemetry\opentelemetry-exporter-logging\1.38.0\opentelemetry-exporter-logging-1.38.0.jar;C:\Users\patha\.m2\repository\io\opentelemetry\opentelemetry-sdk-common\1.38.0\opentelemetry-sdk-common-1.38.0.jar;C:\Users\patha\.m2\repository\io\opentelemetry\opentelemetry-sdk-extension-autoconfigure-spi\1.38.0\opentelemetry-sdk-extension-autoconfigure-spi-1.38.0.jar;C:\Users\patha\.m2\repository\io\opentelemetry\opentelemetry-sdk-extension-autoconfigure\1.38.0\opentelemetry-sdk-extension-autoconfigure-1.38.0.jar;C:\Users\patha\.m2\repository\io\opentelemetry\opentelemetry-api-incubator\1.38.0-alpha\opentelemetry-api-incubator-1.38.0-alpha.jar;C:\Users\patha\.m2\repository\io\opentelemetry\opentelemetry-sdk-trace\1.38.0\opentelemetry-sdk-trace-1.38.0.jar;C:\Users\patha\.m2\repository\io\opentelemetry\opentelemetry-sdk\1.38.0\opentelemetry-sdk-1.38.0.jar;C:\Users\patha\.m2\repository\io\opentelemetry\opentelemetry-sdk-metrics\1.38.0\opentelemetry-sdk-metrics-1.38.0.jar;C:\Users\patha\.m2\repository\io\opentelemetry\opentelemetry-sdk-logs\1.38.0\opentelemetry-sdk-logs-1.38.0.jar;C:\Users\patha\.m2\repository\net\bytebuddy\byte-buddy\1.14.15\byte-buddy-1.14.15.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-os\4.21.0\selenium-os-4.21.0.jar;C:\Users\patha\.m2\repository\org\apache\commons\commons-exec\1.4.0\commons-exec-1.4.0.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-safari-driver\4.21.0\selenium-safari-driver-4.21.0.jar;C:\Users\patha\.m2\repository\org\seleniumhq\selenium\selenium-support\4.21.0\selenium-support-4.21.0.jar;C:\Users\patha\.m2\repository\org\testng\testng\7.10.2\testng-7.10.2.jar;C:\Users\patha\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\patha\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\patha\.m2\repository\org\webjars\jquery\3.7.1\jquery-3.7.1.jar;C:\Users\patha\.m2\repository\io\github\bonigarcia\webdrivermanager\5.8.0\webdrivermanager-5.8.0.jar;C:\Users\patha\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\patha\.m2\repository\com\github\docker-java\docker-java\3.3.6\docker-java-3.3.6.jar;C:\Users\patha\.m2\repository\com\github\docker-java\docker-java-core\3.3.6\docker-java-core-3.3.6.jar;C:\Users\patha\.m2\repository\com\github\docker-java\docker-java-api\3.3.6\docker-java-api-3.3.6.jar;C:\Users\patha\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\patha\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.10.3\jackson-databind-2.10.3.jar;C:\Users\patha\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.10.3\jackson-core-2.10.3.jar;C:\Users\patha\.m2\repository\org\bouncycastle\bcpkix-jdk18on\1.76\bcpkix-jdk18on-1.76.jar;C:\Users\patha\.m2\repository\org\bouncycastle\bcprov-jdk18on\1.76\bcprov-jdk18on-1.76.jar;C:\Users\patha\.m2\repository\org\bouncycastle\bcutil-jdk18on\1.76\bcutil-jdk18on-1.76.jar;C:\Users\patha\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.30\jcl-over-slf4j-1.7.30.jar;C:\Users\patha\.m2\repository\com\github\docker-java\docker-java-transport-httpclient5\3.3.6\docker-java-transport-httpclient5-3.3.6.jar;C:\Users\patha\.m2\repository\com\github\docker-java\docker-java-transport\3.3.6\docker-java-transport-3.3.6.jar;C:\Users\patha\.m2\repository\net\java\dev\jna\jna\5.13.0\jna-5.13.0.jar;C:\Users\patha\.m2\repository\org\brotli\dec\0.1.2\dec-0.1.2.jar;C:\Users\patha\.m2\repository\org\apache\commons\commons-lang3\3.14.0\commons-lang3-3.14.0.jar;C:\Users\patha\.m2\repository\org\apache\commons\commons-compress\1.26.1\commons-compress-1.26.1.jar;C:\Users\patha\.m2\repository\commons-codec\commons-codec\1.16.1\commons-codec-1.16.1.jar;C:\Users\patha\.m2\repository\commons-io\commons-io\2.15.1\commons-io-2.15.1.jar;C:\Users\patha\.m2\repository\org\apache\httpcomponents\client5\httpclient5\5.2.1\httpclient5-5.2.1.jar;C:\Users\patha\.m2\repository\org\apache\httpcomponents\core5\httpcore5\5.2\httpcore5-5.2.jar;C:\Users\patha\.m2\repository\org\apache\httpcomponents\core5\httpcore5-h2\5.2\httpcore5-h2-5.2.jar;C:\Users\patha\.m2\repository\org\apache\ant\ant\1.10.14\ant-1.10.14.jar;C:\Users\patha\.m2\repository\org\apache\ant\ant-launcher\1.10.14\ant-launcher-1.10.14.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -34,7 +34,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\patha\AppData\Local\Temp\surefire7551440364486851525\surefirebooter-20260426205115870_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\patha\AppData\Local\Temp\surefire12118785416976246008\surefirebooter-20260426225230281_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.21+9-adhoc..jdk11u"/>
@@ -62,34 +62,34 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="testLoginPageLoads" classname="com.zapgo.tests.LoginTest" time="0.061">
+  <testcase name="testLoginPageLoads" classname="com.zapgo.tests.LoginTest" time="0.065">
     <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
-Apr 26, 2026 8:51:17 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+Apr 26, 2026 10:52:32 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 147
-Apr 26, 2026 8:51:17 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+Apr 26, 2026 10:52:33 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
 WARNING: Unable to find version of CDP to use for 147.0.7727.116. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.21.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
 ]]></system-err>
   </testcase>
-  <testcase name="testInvalidLoginShowsError" classname="com.zapgo.tests.LoginTest" time="3.476"/>
-  <testcase name="testValidLogin" classname="com.zapgo.tests.LoginTest" time="1.851"/>
-  <testcase name="testLogout" classname="com.zapgo.tests.LoginTest" time="0.719"/>
-  <testcase name="testRegisterPageLoads" classname="com.zapgo.tests.RegisterTest" time="0.14"/>
-  <testcase name="testPasswordMismatchShowsError" classname="com.zapgo.tests.RegisterTest" time="0.423"/>
-  <testcase name="testRegisterWithExistingEmail" classname="com.zapgo.tests.RegisterTest" time="1.474"/>
-  <testcase name="testMapLoads" classname="com.zapgo.tests.MapPageTest" time="0.545"/>
-  <testcase name="testRouteFormIsVisible" classname="com.zapgo.tests.MapPageTest" time="0.104"/>
-  <testcase name="testRouteCalculation" classname="com.zapgo.tests.MapPageTest" time="2.669"/>
-  <testcase name="testBookingButtonAppears" classname="com.zapgo.tests.MapPageTest" time="0.03"/>
-  <testcase name="testBookingsPageLoads" classname="com.zapgo.tests.BookingsPageTest" time="0.567"/>
-  <testcase name="testBookingsTableOrEmptyState" classname="com.zapgo.tests.BookingsPageTest" time="2.11"/>
-  <testcase name="testStatsAreVisible" classname="com.zapgo.tests.BookingsPageTest" time="0.059"/>
-  <testcase name="testAdminLoginPageLoads" classname="com.zapgo.tests.AdminTest" time="0.131"/>
-  <testcase name="testAdminInvalidLogin" classname="com.zapgo.tests.AdminTest" time="0.311"/>
-  <testcase name="testAdminValidLogin" classname="com.zapgo.tests.AdminTest" time="0.36"/>
-  <testcase name="testAdminViewUsersTab" classname="com.zapgo.tests.AdminTest" time="2.687"/>
-  <testcase name="testAdminManageStationsTab" classname="com.zapgo.tests.AdminTest" time="0.191"/>
-  <testcase name="testAdminViewStatisticsTab" classname="com.zapgo.tests.AdminTest" time="0.115"/>
-  <testcase name="testAdminViewBookingsTab" classname="com.zapgo.tests.AdminTest" time="0.111"/>
+  <testcase name="testInvalidLoginShowsError" classname="com.zapgo.tests.LoginTest" time="1.438"/>
+  <testcase name="testValidLogin" classname="com.zapgo.tests.LoginTest" time="1.839"/>
+  <testcase name="testLogout" classname="com.zapgo.tests.LoginTest" time="0.085"/>
+  <testcase name="testRegisterPageLoads" classname="com.zapgo.tests.RegisterTest" time="0.174"/>
+  <testcase name="testPasswordMismatchShowsError" classname="com.zapgo.tests.RegisterTest" time="0.399"/>
+  <testcase name="testRegisterWithExistingEmail" classname="com.zapgo.tests.RegisterTest" time="1.767"/>
+  <testcase name="testMapLoads" classname="com.zapgo.tests.MapPageTest" time="0.542"/>
+  <testcase name="testRouteFormIsVisible" classname="com.zapgo.tests.MapPageTest" time="0.072"/>
+  <testcase name="testRouteCalculation" classname="com.zapgo.tests.MapPageTest" time="4.673"/>
+  <testcase name="testBookingButtonAppears" classname="com.zapgo.tests.MapPageTest" time="0.028"/>
+  <testcase name="testBookingsPageLoads" classname="com.zapgo.tests.BookingsPageTest" time="1.058"/>
+  <testcase name="testBookingsTableOrEmptyState" classname="com.zapgo.tests.BookingsPageTest" time="2.115"/>
+  <testcase name="testStatsAreVisible" classname="com.zapgo.tests.BookingsPageTest" time="0.042"/>
+  <testcase name="testAdminLoginPageLoads" classname="com.zapgo.tests.AdminTest" time="0.132"/>
+  <testcase name="testAdminInvalidLogin" classname="com.zapgo.tests.AdminTest" time="0.321"/>
+  <testcase name="testAdminValidLogin" classname="com.zapgo.tests.AdminTest" time="0.345"/>
+  <testcase name="testAdminViewUsersTab" classname="com.zapgo.tests.AdminTest" time="3.702"/>
+  <testcase name="testAdminManageStationsTab" classname="com.zapgo.tests.AdminTest" time="0.087"/>
+  <testcase name="testAdminViewStatisticsTab" classname="com.zapgo.tests.AdminTest" time="0.109"/>
+  <testcase name="testAdminViewBookingsTab" classname="com.zapgo.tests.AdminTest" time="0.117"/>
 </testsuite>

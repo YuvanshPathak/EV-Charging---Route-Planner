@@ -2,128 +2,128 @@
 <testng-results ignored="0" total="21" passed="21" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-04-26T20:51:17 IST" name="ZapGo Test Suite" finished-at="2026-04-26T20:51:39 IST" duration-ms="21755">
+  <suite started-at="2026-04-26T22:52:33 IST" name="ZapGo Test Suite" finished-at="2026-04-26T22:52:55 IST" duration-ms="22180">
     <groups>
     </groups>
-    <test started-at="2026-04-26T20:51:17 IST" name="ZapGo Automation Tests" finished-at="2026-04-26T20:51:39 IST" duration-ms="21755">
+    <test started-at="2026-04-26T22:52:33 IST" name="ZapGo Automation Tests" finished-at="2026-04-26T22:52:55 IST" duration-ms="22180">
       <class name="com.zapgo.tests.BookingsPageTest">
-        <test-method is-config="true" signature="loginAndOpenBookingsPage()[pri:0, instance:com.zapgo.tests.BookingsPageTest@7ce69770]" started-at="2026-04-26T20:51:30 IST" name="loginAndOpenBookingsPage" finished-at="2026-04-26T20:51:32 IST" duration-ms="1837" status="PASS">
+        <test-method is-config="true" signature="loginAndOpenBookingsPage()[pri:0, instance:com.zapgo.tests.BookingsPageTest@7ce69770]" started-at="2026-04-26T22:52:45 IST" name="loginAndOpenBookingsPage" finished-at="2026-04-26T22:52:47 IST" duration-ms="1303" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginAndOpenBookingsPage -->
-        <test-method signature="testBookingsPageLoads()[pri:1, instance:com.zapgo.tests.BookingsPageTest@7ce69770]" started-at="2026-04-26T20:51:32 IST" name="testBookingsPageLoads" finished-at="2026-04-26T20:51:33 IST" duration-ms="570" status="PASS">
+        <test-method signature="testBookingsPageLoads()[pri:1, instance:com.zapgo.tests.BookingsPageTest@7ce69770]" started-at="2026-04-26T22:52:47 IST" name="testBookingsPageLoads" finished-at="2026-04-26T22:52:48 IST" duration-ms="1059" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testBookingsPageLoads -->
-        <test-method signature="testBookingsTableOrEmptyState()[pri:2, instance:com.zapgo.tests.BookingsPageTest@7ce69770]" started-at="2026-04-26T20:51:33 IST" name="testBookingsTableOrEmptyState" finished-at="2026-04-26T20:51:35 IST" duration-ms="2106" status="PASS">
+        <test-method signature="testBookingsTableOrEmptyState()[pri:2, instance:com.zapgo.tests.BookingsPageTest@7ce69770]" started-at="2026-04-26T22:52:48 IST" name="testBookingsTableOrEmptyState" finished-at="2026-04-26T22:52:50 IST" duration-ms="2116" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testBookingsTableOrEmptyState -->
-        <test-method signature="testStatsAreVisible()[pri:3, instance:com.zapgo.tests.BookingsPageTest@7ce69770]" started-at="2026-04-26T20:51:35 IST" name="testStatsAreVisible" finished-at="2026-04-26T20:51:35 IST" duration-ms="60" status="PASS">
+        <test-method signature="testStatsAreVisible()[pri:3, instance:com.zapgo.tests.BookingsPageTest@7ce69770]" started-at="2026-04-26T22:52:50 IST" name="testStatsAreVisible" finished-at="2026-04-26T22:52:50 IST" duration-ms="42" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testStatsAreVisible -->
       </class> <!-- com.zapgo.tests.BookingsPageTest -->
       <class name="com.zapgo.tests.LoginTest">
-        <test-method is-config="true" signature="setUpSuite()[pri:0, instance:com.zapgo.tests.LoginTest@57a78e3]" started-at="2026-04-26T20:51:16 IST" name="setUpSuite" finished-at="2026-04-26T20:51:17 IST" duration-ms="1190" status="PASS">
+        <test-method is-config="true" signature="setUpSuite()[pri:0, instance:com.zapgo.tests.LoginTest@57a78e3]" started-at="2026-04-26T22:52:31 IST" name="setUpSuite" finished-at="2026-04-26T22:52:33 IST" duration-ms="1996" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpSuite -->
-        <test-method is-config="true" signature="goToLoginPage()[pri:0, instance:com.zapgo.tests.LoginTest@57a78e3]" started-at="2026-04-26T20:51:17 IST" name="goToLoginPage" finished-at="2026-04-26T20:51:18 IST" duration-ms="247" status="PASS">
+        <test-method is-config="true" signature="goToLoginPage()[pri:0, instance:com.zapgo.tests.LoginTest@57a78e3]" started-at="2026-04-26T22:52:33 IST" name="goToLoginPage" finished-at="2026-04-26T22:52:33 IST" duration-ms="269" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- goToLoginPage -->
-        <test-method signature="testLoginPageLoads()[pri:1, instance:com.zapgo.tests.LoginTest@57a78e3]" started-at="2026-04-26T20:51:18 IST" name="testLoginPageLoads" finished-at="2026-04-26T20:51:18 IST" duration-ms="62" status="PASS">
+        <test-method signature="testLoginPageLoads()[pri:1, instance:com.zapgo.tests.LoginTest@57a78e3]" started-at="2026-04-26T22:52:33 IST" name="testLoginPageLoads" finished-at="2026-04-26T22:52:33 IST" duration-ms="64" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLoginPageLoads -->
-        <test-method signature="testInvalidLoginShowsError()[pri:2, instance:com.zapgo.tests.LoginTest@57a78e3]" started-at="2026-04-26T20:51:18 IST" name="testInvalidLoginShowsError" finished-at="2026-04-26T20:51:21 IST" duration-ms="3469" status="PASS">
+        <test-method signature="testInvalidLoginShowsError()[pri:2, instance:com.zapgo.tests.LoginTest@57a78e3]" started-at="2026-04-26T22:52:33 IST" name="testInvalidLoginShowsError" finished-at="2026-04-26T22:52:34 IST" duration-ms="1432" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testInvalidLoginShowsError -->
-        <test-method signature="testValidLogin()[pri:3, instance:com.zapgo.tests.LoginTest@57a78e3]" started-at="2026-04-26T20:51:21 IST" name="testValidLogin" finished-at="2026-04-26T20:51:23 IST" duration-ms="1857" status="PASS">
+        <test-method signature="testValidLogin()[pri:3, instance:com.zapgo.tests.LoginTest@57a78e3]" started-at="2026-04-26T22:52:34 IST" name="testValidLogin" finished-at="2026-04-26T22:52:36 IST" duration-ms="1845" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testValidLogin -->
-        <test-method signature="testLogout()[pri:4, instance:com.zapgo.tests.LoginTest@57a78e3]" started-at="2026-04-26T20:51:23 IST" name="testLogout" finished-at="2026-04-26T20:51:24 IST" duration-ms="719" status="PASS">
+        <test-method signature="testLogout()[pri:4, instance:com.zapgo.tests.LoginTest@57a78e3]" started-at="2026-04-26T22:52:36 IST" name="testLogout" finished-at="2026-04-26T22:52:36 IST" duration-ms="85" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLogout -->
-        <test-method is-config="true" signature="tearDownSuite()[pri:0, instance:com.zapgo.tests.LoginTest@57a78e3]" started-at="2026-04-26T20:51:39 IST" name="tearDownSuite" finished-at="2026-04-26T20:51:39 IST" duration-ms="189" status="PASS">
+        <test-method is-config="true" signature="tearDownSuite()[pri:0, instance:com.zapgo.tests.LoginTest@57a78e3]" started-at="2026-04-26T22:52:55 IST" name="tearDownSuite" finished-at="2026-04-26T22:52:55 IST" duration-ms="212" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownSuite -->
       </class> <!-- com.zapgo.tests.LoginTest -->
       <class name="com.zapgo.tests.AdminTest">
-        <test-method is-config="true" signature="goToAdminPage()[pri:0, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T20:51:35 IST" name="goToAdminPage" finished-at="2026-04-26T20:51:35 IST" duration-ms="97" status="PASS">
+        <test-method is-config="true" signature="goToAdminPage()[pri:0, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T22:52:50 IST" name="goToAdminPage" finished-at="2026-04-26T22:52:50 IST" duration-ms="89" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- goToAdminPage -->
-        <test-method signature="testAdminLoginPageLoads()[pri:1, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T20:51:35 IST" name="testAdminLoginPageLoads" finished-at="2026-04-26T20:51:35 IST" duration-ms="132" status="PASS">
+        <test-method signature="testAdminLoginPageLoads()[pri:1, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T22:52:50 IST" name="testAdminLoginPageLoads" finished-at="2026-04-26T22:52:50 IST" duration-ms="133" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testAdminLoginPageLoads -->
-        <test-method signature="testAdminInvalidLogin()[pri:2, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T20:51:35 IST" name="testAdminInvalidLogin" finished-at="2026-04-26T20:51:36 IST" duration-ms="309" status="PASS">
+        <test-method signature="testAdminInvalidLogin()[pri:2, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T22:52:50 IST" name="testAdminInvalidLogin" finished-at="2026-04-26T22:52:50 IST" duration-ms="321" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testAdminInvalidLogin -->
-        <test-method signature="testAdminValidLogin()[pri:3, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T20:51:36 IST" name="testAdminValidLogin" finished-at="2026-04-26T20:51:36 IST" duration-ms="359" status="PASS">
+        <test-method signature="testAdminValidLogin()[pri:3, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T22:52:50 IST" name="testAdminValidLogin" finished-at="2026-04-26T22:52:51 IST" duration-ms="343" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testAdminValidLogin -->
-        <test-method signature="testAdminViewUsersTab()[pri:4, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T20:51:36 IST" name="testAdminViewUsersTab" finished-at="2026-04-26T20:51:39 IST" depends-on-methods="com.zapgo.tests.AdminTest.testAdminValidLogin" duration-ms="2685" status="PASS">
+        <test-method signature="testAdminViewUsersTab()[pri:4, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T22:52:51 IST" name="testAdminViewUsersTab" finished-at="2026-04-26T22:52:54 IST" depends-on-methods="com.zapgo.tests.AdminTest.testAdminValidLogin" duration-ms="3703" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testAdminViewUsersTab -->
-        <test-method signature="testAdminManageStationsTab()[pri:5, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T20:51:39 IST" name="testAdminManageStationsTab" finished-at="2026-04-26T20:51:39 IST" depends-on-methods="com.zapgo.tests.AdminTest.testAdminValidLogin" duration-ms="192" status="PASS">
+        <test-method signature="testAdminManageStationsTab()[pri:5, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T22:52:54 IST" name="testAdminManageStationsTab" finished-at="2026-04-26T22:52:54 IST" depends-on-methods="com.zapgo.tests.AdminTest.testAdminValidLogin" duration-ms="86" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testAdminManageStationsTab -->
-        <test-method signature="testAdminViewStatisticsTab()[pri:6, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T20:51:39 IST" name="testAdminViewStatisticsTab" finished-at="2026-04-26T20:51:39 IST" depends-on-methods="com.zapgo.tests.AdminTest.testAdminValidLogin" duration-ms="113" status="PASS">
+        <test-method signature="testAdminViewStatisticsTab()[pri:6, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T22:52:54 IST" name="testAdminViewStatisticsTab" finished-at="2026-04-26T22:52:55 IST" depends-on-methods="com.zapgo.tests.AdminTest.testAdminValidLogin" duration-ms="110" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testAdminViewStatisticsTab -->
-        <test-method signature="testAdminViewBookingsTab()[pri:7, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T20:51:39 IST" name="testAdminViewBookingsTab" finished-at="2026-04-26T20:51:39 IST" depends-on-methods="com.zapgo.tests.AdminTest.testAdminValidLogin" duration-ms="111" status="PASS">
+        <test-method signature="testAdminViewBookingsTab()[pri:7, instance:com.zapgo.tests.AdminTest@1750fbeb]" started-at="2026-04-26T22:52:55 IST" name="testAdminViewBookingsTab" finished-at="2026-04-26T22:52:55 IST" depends-on-methods="com.zapgo.tests.AdminTest.testAdminValidLogin" duration-ms="116" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testAdminViewBookingsTab -->
       </class> <!-- com.zapgo.tests.AdminTest -->
       <class name="com.zapgo.tests.MapPageTest">
-        <test-method is-config="true" signature="loginAndOpenMapPage()[pri:0, instance:com.zapgo.tests.MapPageTest@7ce026d3]" started-at="2026-04-26T20:51:26 IST" name="loginAndOpenMapPage" finished-at="2026-04-26T20:51:27 IST" duration-ms="1347" status="PASS">
+        <test-method is-config="true" signature="loginAndOpenMapPage()[pri:0, instance:com.zapgo.tests.MapPageTest@7ce026d3]" started-at="2026-04-26T22:52:39 IST" name="loginAndOpenMapPage" finished-at="2026-04-26T22:52:40 IST" duration-ms="1313" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginAndOpenMapPage -->
-        <test-method signature="testMapLoads()[pri:1, instance:com.zapgo.tests.MapPageTest@7ce026d3]" started-at="2026-04-26T20:51:27 IST" name="testMapLoads" finished-at="2026-04-26T20:51:28 IST" duration-ms="544" status="PASS">
+        <test-method signature="testMapLoads()[pri:1, instance:com.zapgo.tests.MapPageTest@7ce026d3]" started-at="2026-04-26T22:52:40 IST" name="testMapLoads" finished-at="2026-04-26T22:52:40 IST" duration-ms="541" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMapLoads -->
-        <test-method signature="testRouteFormIsVisible()[pri:2, instance:com.zapgo.tests.MapPageTest@7ce026d3]" started-at="2026-04-26T20:51:28 IST" name="testRouteFormIsVisible" finished-at="2026-04-26T20:51:28 IST" duration-ms="104" status="PASS">
+        <test-method signature="testRouteFormIsVisible()[pri:2, instance:com.zapgo.tests.MapPageTest@7ce026d3]" started-at="2026-04-26T22:52:40 IST" name="testRouteFormIsVisible" finished-at="2026-04-26T22:52:41 IST" duration-ms="72" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testRouteFormIsVisible -->
-        <test-method signature="testRouteCalculation()[pri:3, instance:com.zapgo.tests.MapPageTest@7ce026d3]" started-at="2026-04-26T20:51:28 IST" name="testRouteCalculation" finished-at="2026-04-26T20:51:30 IST" duration-ms="2670" status="PASS">
+        <test-method signature="testRouteCalculation()[pri:3, instance:com.zapgo.tests.MapPageTest@7ce026d3]" started-at="2026-04-26T22:52:41 IST" name="testRouteCalculation" finished-at="2026-04-26T22:52:45 IST" duration-ms="4673" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testRouteCalculation -->
-        <test-method signature="testBookingButtonAppears()[pri:4, instance:com.zapgo.tests.MapPageTest@7ce026d3]" started-at="2026-04-26T20:51:30 IST" name="testBookingButtonAppears" finished-at="2026-04-26T20:51:30 IST" depends-on-methods="com.zapgo.tests.MapPageTest.testRouteCalculation" duration-ms="29" status="PASS">
+        <test-method signature="testBookingButtonAppears()[pri:4, instance:com.zapgo.tests.MapPageTest@7ce026d3]" started-at="2026-04-26T22:52:45 IST" name="testBookingButtonAppears" finished-at="2026-04-26T22:52:45 IST" depends-on-methods="com.zapgo.tests.MapPageTest.testRouteCalculation" duration-ms="28" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testBookingButtonAppears -->
       </class> <!-- com.zapgo.tests.MapPageTest -->
       <class name="com.zapgo.tests.RegisterTest">
-        <test-method is-config="true" signature="goToRegisterPage()[pri:0, instance:com.zapgo.tests.RegisterTest@14028087]" started-at="2026-04-26T20:51:24 IST" name="goToRegisterPage" finished-at="2026-04-26T20:51:24 IST" duration-ms="48" status="PASS">
+        <test-method is-config="true" signature="goToRegisterPage()[pri:0, instance:com.zapgo.tests.RegisterTest@14028087]" started-at="2026-04-26T22:52:36 IST" name="goToRegisterPage" finished-at="2026-04-26T22:52:36 IST" duration-ms="54" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- goToRegisterPage -->
-        <test-method signature="testRegisterPageLoads()[pri:1, instance:com.zapgo.tests.RegisterTest@14028087]" started-at="2026-04-26T20:51:24 IST" name="testRegisterPageLoads" finished-at="2026-04-26T20:51:24 IST" duration-ms="141" status="PASS">
+        <test-method signature="testRegisterPageLoads()[pri:1, instance:com.zapgo.tests.RegisterTest@14028087]" started-at="2026-04-26T22:52:36 IST" name="testRegisterPageLoads" finished-at="2026-04-26T22:52:36 IST" duration-ms="174" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testRegisterPageLoads -->
-        <test-method signature="testPasswordMismatchShowsError()[pri:2, instance:com.zapgo.tests.RegisterTest@14028087]" started-at="2026-04-26T20:51:24 IST" name="testPasswordMismatchShowsError" finished-at="2026-04-26T20:51:24 IST" duration-ms="422" status="PASS">
+        <test-method signature="testPasswordMismatchShowsError()[pri:2, instance:com.zapgo.tests.RegisterTest@14028087]" started-at="2026-04-26T22:52:36 IST" name="testPasswordMismatchShowsError" finished-at="2026-04-26T22:52:37 IST" duration-ms="399" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testPasswordMismatchShowsError -->
-        <test-method signature="testRegisterWithExistingEmail()[pri:3, instance:com.zapgo.tests.RegisterTest@14028087]" started-at="2026-04-26T20:51:24 IST" name="testRegisterWithExistingEmail" finished-at="2026-04-26T20:51:26 IST" duration-ms="1474" status="PASS">
+        <test-method signature="testRegisterWithExistingEmail()[pri:3, instance:com.zapgo.tests.RegisterTest@14028087]" started-at="2026-04-26T22:52:37 IST" name="testRegisterWithExistingEmail" finished-at="2026-04-26T22:52:39 IST" duration-ms="1766" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testRegisterWithExistingEmail -->
