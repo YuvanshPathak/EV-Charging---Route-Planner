@@ -8,6 +8,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useAuth } from "../context/AuthContext";
 import { createBlock, getLastBlock } from "../utils/ledger.js";
+import { narrateRoute } from "../utils/geminiNarrator.js";
 
 const defaultMarkerIcon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
@@ -44,6 +45,11 @@ export default function MapPage() {
   const [totalTimeHrs, setTotalTimeHrs] = useState(null);
   const [stops, setStops] = useState([]);
   const [bookings, setBookings] = useState([]);
+
+  const [narration, setNarration] = useState("");
+  const [narrating, setNarrating] = useState(false);
+  const [narrateError, setNarrateError] = useState("");
+  const [narrateSpots, setNarrateSpots] = useState([]);
 
   const [toast, setToast] = useState({ message: "", type: "success", visible: false });
 
@@ -387,6 +393,25 @@ export default function MapPage() {
     showToast("Booking confirmed!", "success");
   }
 
+  // -------- AI Route Narrator --------
+
+  const handleNarrate = async () => {
+    setNarrating(true);
+    setNarration("");
+    setNarrateError("");
+    setNarrateSpots([]);
+    try {
+      const { narration: text, spots } = await narrateRoute({ start, end, totalDist, totalTimeHrs, stops, initialCharge, finalCharge, rangeKm });
+      setNarration(text);
+      setNarrateSpots(spots || []);
+    } catch (err) {
+      console.error("[ZapGo Narrator] Error:", err);
+      setNarrateError(err?.message || "Could not generate narration. Please try again.");
+    } finally {
+      setNarrating(false);
+    }
+  };
+
   // -------- Render --------
 
   return (
@@ -563,6 +588,61 @@ export default function MapPage() {
             >
               Confirm Booking
             </button>
+
+            {/* AI Route Narrator */}
+            <button
+              className="narrate-btn"
+              onClick={handleNarrate}
+              disabled={narrating || totalDist === null}
+            >
+              <span className="narrate-btn__inner">
+                <span className="narrate-btn__label">
+                  AI Route Narrator
+                  <svg
+                    className="narrate-btn__sparkle"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+                    <path d="M5 3v4" />
+                    <path d="M19 17v4" />
+                    <path d="M3 5h4" />
+                    <path d="M17 19h4" />
+                  </svg>
+                </span>
+                <span className="narrate-btn__sub">Powered by Llama 3.2</span>
+              </span>
+            </button>
+            {narrating && (
+              <div className="narrate-loading">Generating narration...</div>
+            )}
+            {narration && (
+              <div className="narrate-box">
+                <div className="narrate-ai-badge">🤖 AI Generated</div>
+                {narration}
+              </div>
+            )}
+            {narrateSpots.length > 0 && (
+              <div className="narrate-spots">
+                <p className="narrate-spots__title">📍 Top spots to visit in {end}</p>
+                {narrateSpots.map((spot, i) => (
+                  <div key={i} className="narrate-spot-card">
+                    <span className="narrate-spot-name">{spot.name}</span>
+                    {spot.desc && <span className="narrate-spot-desc">{spot.desc}</span>}
+                  </div>
+                ))}
+              </div>
+            )}
+            {narrateError && (
+              <div className="narrate-error">{narrateError}</div>
+            )}
           </div>
         )}
 
