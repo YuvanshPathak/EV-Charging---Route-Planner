@@ -49,3 +49,16 @@ lint_output.txt
 *.njsproj
 *.sln
 *.sw?
+
+# --- JAVA & BUILD ARTIFACTS ---
+target/
+bin/
+*.class
+*.jar
+*.war
+*.ear
+
+# --- MAVEN/GRADLE SPECIFICS ---
+.mvn/
+.gradle/
+build/
