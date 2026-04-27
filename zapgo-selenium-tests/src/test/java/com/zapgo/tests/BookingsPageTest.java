@@ -27,8 +27,8 @@ import java.time.Duration;
  */
 public class BookingsPageTest extends BaseTest {
 
-    private static final String EMAIL    = "testuser@zapgo.com";
-    private static final String PASSWORD = "Test@1234";
+    private static final String EMAIL    = "yuvansh.bookings@gmail.com";
+    private static final String PASSWORD = "123456";
     private static final Duration WAIT   = Duration.ofSeconds(15);
 
     // -----------------------------------------------------------------------

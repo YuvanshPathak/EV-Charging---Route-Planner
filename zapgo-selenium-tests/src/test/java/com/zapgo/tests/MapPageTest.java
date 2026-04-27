@@ -221,4 +221,191 @@ public class MapPageTest extends BaseTest {
         Assert.assertEquals(bookBtn.getText().trim(), "Confirm Booking",
                 "Button text should be 'Confirm Booking'");
     }
+
+    // -----------------------------------------------------------------------
+    // AI Route Narrator Tests (priorities 5–8)
+    // Selectors derived directly from src/pages/MapPage.jsx and src/user.css:
+    //
+    //   Narrate button        → button.narrate-btn
+    //   Loading indicator     → div.narrate-loading
+    //   Response box          → div.narrate-box
+    //   AI badge (in box)     → div.narrate-ai-badge   (text: "🤖 AI Generated")
+    //   Spots container       → div.narrate-spots
+    //   Spots title           → p.narrate-spots__title
+    //   Spot cards            → div.narrate-spot-card
+    //   Spot name (in card)   → span.narrate-spot-name
+    // -----------------------------------------------------------------------
+
+    /**
+     * Test 5: After the Mumbai → Pune route is calculated (priority 3), the
+     * "AI Route Narrator" button (button.narrate-btn) must be present, visible,
+     * and not disabled.
+     *
+     * MapPage.jsx: disabled={narrating || totalDist === null}
+     * The button only renders inside {totalDist != null && ...} so its presence
+     * already implies a route exists; we additionally assert it is enabled.
+     */
+    @Test(priority = 5, dependsOnMethods = {"testRouteCalculation"})
+    public void testNarrateButtonAppearsAfterRoute() {
+        WebDriverWait wait = new WebDriverWait(driver, WAIT);
+
+        // button.narrate-btn is inside div#routeDetails, rendered after route calculation
+        WebElement narrateBtn = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.narrate-btn"))
+        );
+
+        Assert.assertTrue(narrateBtn.isDisplayed(),
+                "Narrate button (button.narrate-btn) should be visible after route calculation");
+
+        // Must not carry the disabled attribute — totalDist is set, narrating is false
+        Assert.assertFalse(
+                narrateBtn.getAttribute("disabled") != null,
+                "Narrate button should be enabled after a route is calculated"
+        );
+    }
+
+    /**
+     * Test 6: Clicking "AI Route Narrator" triggers Ollama and produces a response.
+     *
+     * // NOTE: Ollama must be running at http://localhost:11434 with llama3.2 before running this test
+     *
+     * We wait up to 90 seconds for div.narrate-box because llama3.2 runs locally
+     * and the first cold-start inference (loading into GPU VRAM) can be slow.
+     * Once visible we assert content length and the AI badge text.
+     */
+    @Test(priority = 6, dependsOnMethods = {"testNarrateButtonAppearsAfterRoute"})
+    public void testNarrateRouteGeneratesOutput() {
+        WebDriverWait wait       = new WebDriverWait(driver, WAIT);
+        WebDriverWait ollamaWait = new WebDriverWait(driver, Duration.ofSeconds(90));
+
+        // Click the narrate button
+        WebElement narrateBtn = wait.until(
+                ExpectedConditions.elementToBeClickable(By.cssSelector("button.narrate-btn"))
+        );
+        narrateBtn.click();
+
+        // Wait up to 90 s for div.narrate-box to appear (Ollama inference time)
+        WebElement narrateBox = ollamaWait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.narrate-box"))
+        );
+
+        // narrate-box must be displayed
+        Assert.assertTrue(narrateBox.isDisplayed(),
+                "div.narrate-box should be visible after narration completes");
+
+        // Text content must not be empty
+        String boxText = narrateBox.getText().trim();
+        Assert.assertFalse(boxText.isEmpty(),
+                "narrate-box text content should not be empty");
+
+        // Must be a real narration — more than 50 characters
+        Assert.assertTrue(boxText.length() > 50,
+                "narrate-box should contain more than 50 characters of narration text");
+
+        // Badge (div.narrate-ai-badge) inside the box must say "AI GENERATED"
+        WebElement badge = narrateBox.findElement(By.cssSelector("div.narrate-ai-badge"));
+        Assert.assertTrue(badge.getText().toUpperCase().contains("AI GENERATED"),
+                "div.narrate-ai-badge should contain 'AI GENERATED' text");
+    }
+
+    /**
+     * Test 7: After narration, div.narrate-spots is rendered with a heading and
+     * exactly 3 spot cards, each having a non-empty name.
+     *
+     * Reuses the narration state from priority 6 — does NOT click narrate again.
+     */
+    @Test(priority = 7, dependsOnMethods = {"testNarrateRouteGeneratesOutput"})
+    public void testSpotsSection() {
+        WebDriverWait wait = new WebDriverWait(driver, WAIT);
+
+        // Spots container must be visible
+        WebElement spotsSection = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.narrate-spots"))
+        );
+        Assert.assertTrue(spotsSection.isDisplayed(),
+                "div.narrate-spots should be visible after narration completes");
+
+        // Title (p.narrate-spots__title) must contain "TOP SPOTS TO VISIT"
+        WebElement spotsTitle = spotsSection.findElement(By.cssSelector("p.narrate-spots__title"));
+        Assert.assertTrue(spotsTitle.getText().toUpperCase().contains("TOP SPOTS TO VISIT"),
+                "p.narrate-spots__title should contain 'TOP SPOTS TO VISIT'");
+
+        // Exactly 3 spot cards must be rendered
+        List<WebElement> spotCards = spotsSection.findElements(By.cssSelector("div.narrate-spot-card"));
+        Assert.assertEquals(spotCards.size(), 3,
+                "Exactly 3 div.narrate-spot-card elements should be rendered");
+
+        // Each card must have a non-empty span.narrate-spot-name
+        for (int i = 0; i < spotCards.size(); i++) {
+            WebElement spotName = spotCards.get(i).findElement(By.cssSelector("span.narrate-spot-name"));
+            String nameText = spotName.getText().trim();
+            Assert.assertFalse(nameText.isEmpty(),
+                    "Spot card " + (i + 1) + ": span.narrate-spot-name should not be empty");
+        }
+    }
+
+    /**
+     * Test 8: Without a calculated route the narrate button must be either absent
+     * from the DOM or present but disabled.
+     *
+     * Navigates to /app fresh so totalDist resets to null. MapPage.jsx only renders
+     * the narrate button inside {totalDist != null && ...}, so it will not be in the DOM.
+     * After the assertion the Mumbai → Pune route is recalculated to restore page state.
+     */
+    @Test(priority = 8)
+    public void testNarrateButtonRequiresRoute() {
+        // Fresh navigation — totalDist becomes null, routeDetails block is not rendered
+        navigateTo("/app");
+        WebDriverWait wait = new WebDriverWait(driver, WAIT);
+
+        // Wait for the form to be ready (plan-btn must be present)
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.plan-btn")));
+
+        // Narrate button should be absent OR disabled
+        List<WebElement> narrateBtns = driver.findElements(By.cssSelector("button.narrate-btn"));
+        if (narrateBtns.isEmpty()) {
+            // Expected: button not rendered at all because totalDist == null
+            Assert.assertTrue(true,
+                    "Narrate button correctly absent from DOM before route calculation");
+        } else {
+            // Defensive case: button is present but must carry the disabled attribute
+            Assert.assertNotNull(narrateBtns.get(0).getAttribute("disabled"),
+                    "Narrate button must be disabled when no route has been calculated");
+        }
+
+        // --- Restore state: recalculate Mumbai → Pune so later tests can depend on it ---
+        WebElement startInput = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.cssSelector("input.field-input[placeholder='e.g. Srinagar']"))
+        );
+        startInput.clear();
+        startInput.sendKeys("Mumbai");
+
+        driver.findElement(By.cssSelector("input.field-input[placeholder='e.g. Kanyakumari']"))
+              .sendKeys("Pune");
+
+        WebElement initCharge = driver.findElement(
+                By.cssSelector("input.field-input[placeholder='Initial %']"));
+        initCharge.clear();
+        initCharge.sendKeys("80");
+
+        WebElement finalCharge = driver.findElement(
+                By.cssSelector("input.field-input[placeholder='Final %']"));
+        finalCharge.clear();
+        finalCharge.sendKeys("20");
+
+        WebElement rangeInput = driver.findElement(
+                By.cssSelector("input.field-input[placeholder='between 1 and 2000']"));
+        rangeInput.clear();
+        rangeInput.sendKeys("300");
+
+        driver.findElement(By.cssSelector("input.field-input[placeholder='HH']")).sendKeys("10");
+        driver.findElement(By.cssSelector("input.field-input[placeholder='MM']")).sendKeys("00");
+
+        driver.findElement(By.cssSelector("button.plan-btn")).click();
+
+        new WebDriverWait(driver, LONG_WAIT).until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("routeDetails"))
+        );
+    }
 }
